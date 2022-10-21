@@ -12,12 +12,18 @@ func metrics(w http.ResponseWriter, req *http.Request) {
 }
 
 func main() {
-	go func() {
-		for {
-			http.Get("https://questrequest.ru/cron/cron_amo_buy_sell_search_infopart")
-			time.Sleep(3 * time.Second)
-		}
-	}()
+
+	conf, _ := newConfig("local.yml")
+
+	for _, v := range conf.LINKS_COLLECTION {
+		fmt.Println("Starting ", v.Uri, " per ", v.Interval)
+		go func() {
+			for {
+				http.Get(v.Uri)
+				time.Sleep(time.Duration(v.Interval) * time.Millisecond)
+			}
+		}()
+	}
 
 	http.HandleFunc("/metrics", metrics)
 

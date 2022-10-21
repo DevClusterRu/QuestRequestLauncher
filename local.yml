@@ -1,0 +1,3 @@
+LINKS_COLLECTION:
+  - {"uri":"https://questrequest.ru/cron/cron_amo_buy_sell_search_infopart", "interval":3000}
+#  "Link2": {"uri":"https://questrequest.ru/cron/cron_amo_buy_sell_search_infopart", "interval":3000}
